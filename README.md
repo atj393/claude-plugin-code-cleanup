@@ -6,15 +6,13 @@ A **lead agent** coordinates **seven specialist workers** (one per track) and a 
 
 ---
 
-## Install (local, for yourself)
+## Install
 
-The plugin lives in `D:\repos\claude\plugins\code-cleanup`. A tiny local marketplace that points at it lives in `D:\repos\claude\plugins\marketplace`.
-
-From any Claude Code session:
+From any Claude Code session (CLI, desktop app, or supported IDE):
 
 ```
-/plugin marketplace add D:\repos\claude\plugins\marketplace
-/plugin install code-cleanup@code-cleanup-marketplace
+/plugin marketplace add atj393/claude-plugins
+/plugin install code-cleanup
 ```
 
 Then confirm:
@@ -24,9 +22,7 @@ Then confirm:
 /help
 ```
 
-You should see `/code-cleanup:run` listed.
-
-The plugin installs at **user scope** — once installed, it's available in every project on your machine.
+You should see `code-cleanup` listed under `/plugin` and `/code-cleanup:run` in `/help`. Plugins install at **user scope** — available in every project on your machine.
 
 ---
 
@@ -85,40 +81,27 @@ Parallel assessment is encouraged; parallel editing only happens when file owner
 
 ```
 /plugin uninstall code-cleanup
-/plugin marketplace remove code-cleanup-marketplace
+/plugin marketplace remove atj393-plugins
 ```
 
 ---
 
-## Future: share with the team
+## Local development
 
-When you're ready to share this with teammates:
-
-### Option 1 — one repo, two folders
+If you're hacking on the plugin itself, clone it and register a local marketplace that points at your working copy:
 
 ```
-<your-org>/claude-plugins (git repo)
-├── code-cleanup/
-└── marketplace/
+git clone https://github.com/atj393/claude-plugin-code-cleanup.git
 ```
 
-Teammates run:
+Create a `marketplace.json` in a sibling folder pointing at the clone, then:
+
 ```
-/plugin marketplace add <your-org>/claude-plugins
+/plugin marketplace add <path-to-local-marketplace>
 /plugin install code-cleanup
 ```
 
-### Option 2 — separate repos
-
-Push `code-cleanup/` and `marketplace/` as separate repos. Update `marketplace.json` `source` to a git URL:
-
-```json
-"source": { "source": "github", "repo": "<your-org>/code-cleanup" }
-```
-
-Private GitLab repos work the same — Claude Code uses your git credentials / `GITLAB_TOKEN`.
-
-No changes to the plugin files themselves are needed when moving to git.
+Edits to the clone take effect on the next `/plugin update`.
 
 ---
 
@@ -128,6 +111,7 @@ No changes to the plugin files themselves are needed when moving to git.
 code-cleanup/
 ├── .claude-plugin/plugin.json
 ├── README.md
+├── LICENSE
 ├── agents/
 │   ├── code-cleanup-lead.md
 │   ├── code-cleanup-dedup.md
