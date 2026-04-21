@@ -1,0 +1,7 @@
+{
+  "name": "code-cleanup",
+  "description": "Careful, low-risk codebase cleanup pass. A lead agent coordinates seven specialist workers (dedup, dead code, types, cycles, stronger types, error handling, deprecated/AI slop) and a final reviewer. Only high-confidence, low-risk edits are applied.",
+  "version": "1.0.0",
+  "keywords": ["cleanup", "refactor", "dead-code", "types", "code-quality"],
+  "license": "MIT"
+}
